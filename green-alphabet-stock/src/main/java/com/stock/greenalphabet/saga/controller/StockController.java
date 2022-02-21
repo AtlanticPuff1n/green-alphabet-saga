@@ -2,19 +2,19 @@ package com.stock.greenalphabet.saga.controller;
 
 import com.stock.greenalphabet.saga.model.Stock;
 import com.stock.greenalphabet.saga.service.StockService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/stock")
+@AllArgsConstructor
 public class StockController {
-    @Autowired
     private StockService stockService;
 
     @GetMapping
-    public List<Stock> findAll(){
+    public List<Stock> findAll() {
         return stockService.findAll();
     }
 

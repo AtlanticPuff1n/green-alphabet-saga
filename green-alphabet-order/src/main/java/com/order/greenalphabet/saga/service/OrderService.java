@@ -3,8 +3,8 @@ package com.order.greenalphabet.saga.service;
 import com.order.greenalphabet.saga.model.Order;
 import com.order.greenalphabet.saga.model.Status;
 import com.order.greenalphabet.saga.repository.OrderRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,15 +12,13 @@ import java.util.List;
 import static com.order.greenalphabet.saga.constants.Constants.ORDER_CREATED_NAME;
 
 @Service
+@AllArgsConstructor
 public class OrderService {
-    @Autowired
     private RabbitTemplate template;
-
-    @Autowired
     private OrderRepository orderRepository;
 
-    public List<Order> findAll(){
-        return  orderRepository.findAll();
+    public List<Order> findAll() {
+        return orderRepository.findAll();
     }
 
     public Order placeOrder(Order order) {

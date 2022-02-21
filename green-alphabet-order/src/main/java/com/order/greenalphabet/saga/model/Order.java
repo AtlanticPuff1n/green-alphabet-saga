@@ -1,19 +1,18 @@
 package com.order.greenalphabet.saga.model;
 
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
 
+
+@Entity
+@Table(name = "orders")
 @Getter
 @Setter
 @ToString
-@RequiredArgsConstructor
-@Entity
-@Table(name = "orders")
+@AllArgsConstructor
+@NoArgsConstructor
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
