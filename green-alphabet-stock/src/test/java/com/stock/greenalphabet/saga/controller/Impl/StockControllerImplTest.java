@@ -1,6 +1,7 @@
-package com.stock.greenalphabet.saga.controller;
+package com.stock.greenalphabet.saga.controller.Impl;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.stock.greenalphabet.saga.controller.Impl.StockControllerImpl;
 import com.stock.greenalphabet.saga.model.Stock;
 import com.stock.greenalphabet.saga.service.StockService;
 import org.junit.jupiter.api.Test;
@@ -21,11 +22,11 @@ import java.util.ArrayList;
 import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.when;
 
-@ContextConfiguration(classes = {StockController.class})
+@ContextConfiguration(classes = {StockControllerImpl.class})
 @ExtendWith(SpringExtension.class)
-class StockControllerTest {
+class StockControllerImplTest {
     @Autowired
-    private StockController stockController;
+    private StockControllerImpl stockControllerImpl;
 
     @MockBean
     private StockService stockService;
@@ -48,7 +49,7 @@ class StockControllerTest {
         MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders.post("/stock/add")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(content);
-        MockMvcBuilders.standaloneSetup(this.stockController)
+        MockMvcBuilders.standaloneSetup(this.stockControllerImpl)
                 .build()
                 .perform(requestBuilder)
                 .andExpect(MockMvcResultMatchers.status().isOk())
@@ -61,7 +62,7 @@ class StockControllerTest {
     void testFindAll() throws Exception {
         when(this.stockService.findAll()).thenReturn(new ArrayList<>());
         MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders.get("/stock");
-        MockMvcBuilders.standaloneSetup(this.stockController)
+        MockMvcBuilders.standaloneSetup(this.stockControllerImpl)
                 .build()
                 .perform(requestBuilder)
                 .andExpect(MockMvcResultMatchers.status().isOk())
@@ -74,7 +75,7 @@ class StockControllerTest {
         when(this.stockService.findAll()).thenReturn(new ArrayList<>());
         MockHttpServletRequestBuilder getResult = MockMvcRequestBuilders.get("/stock");
         getResult.characterEncoding("Encoding");
-        MockMvcBuilders.standaloneSetup(this.stockController)
+        MockMvcBuilders.standaloneSetup(this.stockControllerImpl)
                 .build()
                 .perform(getResult)
                 .andExpect(MockMvcResultMatchers.status().isOk())

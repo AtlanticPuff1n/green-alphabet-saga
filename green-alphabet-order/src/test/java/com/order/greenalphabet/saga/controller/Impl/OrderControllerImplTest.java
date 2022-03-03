@@ -1,6 +1,7 @@
-package com.order.greenalphabet.saga.controller;
+package com.order.greenalphabet.saga.controller.Impl;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.order.greenalphabet.saga.controller.impl.OrderControllerImpl;
 import com.order.greenalphabet.saga.model.Order;
 import com.order.greenalphabet.saga.model.Status;
 import com.order.greenalphabet.saga.service.OrderService;
@@ -22,11 +23,11 @@ import java.util.ArrayList;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
-@ContextConfiguration(classes = {OrderController.class})
+@ContextConfiguration(classes = {OrderControllerImpl.class})
 @ExtendWith(SpringExtension.class)
-class OrderControllerTest {
+class OrderControllerImplTest {
     @Autowired
-    private OrderController orderController;
+    private OrderControllerImpl orderControllerImpl;
 
     @MockBean
     private OrderService orderService;
@@ -35,7 +36,7 @@ class OrderControllerTest {
     void testFindAll() throws Exception {
         when(this.orderService.findAll()).thenReturn(new ArrayList<>());
         MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders.get("/orders");
-        MockMvcBuilders.standaloneSetup(this.orderController)
+        MockMvcBuilders.standaloneSetup(this.orderControllerImpl)
                 .build()
                 .perform(requestBuilder)
                 .andExpect(MockMvcResultMatchers.status().isOk())
@@ -48,7 +49,7 @@ class OrderControllerTest {
         when(this.orderService.findAll()).thenReturn(new ArrayList<>());
         MockHttpServletRequestBuilder getResult = MockMvcRequestBuilders.get("/orders");
         getResult.characterEncoding("Encoding");
-        MockMvcBuilders.standaloneSetup(this.orderController)
+        MockMvcBuilders.standaloneSetup(this.orderControllerImpl)
                 .build()
                 .perform(getResult)
                 .andExpect(MockMvcResultMatchers.status().isOk())
@@ -76,7 +77,7 @@ class OrderControllerTest {
         MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders.post("/orders/add")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(content);
-        MockMvcBuilders.standaloneSetup(this.orderController)
+        MockMvcBuilders.standaloneSetup(this.orderControllerImpl)
                 .build()
                 .perform(requestBuilder)
                 .andExpect(MockMvcResultMatchers.status().isOk())

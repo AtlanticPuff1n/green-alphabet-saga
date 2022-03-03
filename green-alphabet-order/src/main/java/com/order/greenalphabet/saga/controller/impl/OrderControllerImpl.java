@@ -1,5 +1,6 @@
-package com.order.greenalphabet.saga.controller;
+package com.order.greenalphabet.saga.controller.impl;
 
+import com.order.greenalphabet.saga.controller.api.OrderControllerApi;
 import com.order.greenalphabet.saga.model.Order;
 import com.order.greenalphabet.saga.service.OrderService;
 import lombok.AllArgsConstructor;
@@ -8,17 +9,16 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/orders")
 @AllArgsConstructor
-public class OrderController {
+public class OrderControllerImpl implements OrderControllerApi {
     private OrderService orderService;
 
-    @GetMapping
+    @Override
     public List<Order> findAll() {
         return orderService.findAll();
     }
 
-    @PostMapping("/add")
+    @Override
     public Order placeOrder(@RequestBody Order order) {
         return orderService.placeOrder(order);
     }
